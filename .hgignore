@@ -1,3 +1,4 @@
 syntax: glob
+lib/
 .DS_Store
 .*.swp
