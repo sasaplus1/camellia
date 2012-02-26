@@ -1,0 +1,5 @@
+program camellia;
+
+begin
+
+end.
