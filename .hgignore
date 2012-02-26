@@ -1,4 +1,10 @@
 syntax: glob
-lib/
+fpc.cfg
 .DS_Store
+*.exe
+*.o
+*.obj
+*.ppu
+*.res
 .*.swp
+lib/
