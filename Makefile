@@ -3,8 +3,8 @@
 .DEFAULT_GOAL := all
 
 # path settings {{{
-main_exe = ./core/camellia.exe
-main_res = ./core/camellia.res
+core_exe = ./core/camellia.exe
+core_res = ./core/camellia.res
 
 fptest = ./lib/fptest
 apilib = ./lib/apilib
@@ -40,7 +40,7 @@ downloader = wget -O '$(w32api_arc)'
 # }}}
 
 # file list {{{
-main_units = $(sort $(addprefix -Fu, \
+core_units = $(sort $(addprefix -Fu, \
   $(dir $(wildcard ./core/*)) \
   $(dir $(wildcard ./core/*/*)) \
 ))
@@ -62,30 +62,30 @@ objs = $(filter %.o %.obj %.or %.ppu, \
 all:
 	@echo 'Target:'
 	@echo '  clean'
-	@echo '  main'
-	@echo '  main-debug'
-	@echo '  main-test'
+	@echo '  core'
+	@echo '  core-debug'
+	@echo '  core-test'
 	@echo '  setup'
 # }}}
 
 .PHONY: clean # {{{
 clean:
-	$(RM) $(main_exe) $(main_res) $(objs)
+	$(RM) $(core_exe) $(core_res) $(objs)
 # }}}
 
-.PHONY: main # {{{
-main: $(main_res)
-	$(PC) $(PFLAGS) $(main_units) -O2 -WG -Xs $(main_exe:.exe=.lpr)
+.PHONY: core # {{{
+core: $(core_res)
+	$(PC) $(PFLAGS) $(core_units) -O2 -WG -Xs $(core_exe:.exe=.lpr)
 # }}}
 
-.PHONY: main-debug # {{{
-main-debug: $(main_res)
-	$(PC) $(PFLAGS) $(main_units) -gh -gl -WG $(main_exe:.exe=.lpr)
+.PHONY: core-debug # {{{
+core-debug: $(core_res)
+	$(PC) $(PFLAGS) $(core_units) -gh -gl -WG $(core_exe:.exe=.lpr)
 # }}}
 
-.PHONY: main-test # {{{
-main-test:
-	$(PC) $(PFLAGS) $(main_units) -dTEST -WC $(main_exe:.exe=.lpr)
+.PHONY: core-test # {{{
+core-test:
+	$(PC) $(PFLAGS) $(core_units) -dTEST -WC $(core_exe:.exe=.lpr)
 # }}}
 
 .PHONY: setup # {{{
