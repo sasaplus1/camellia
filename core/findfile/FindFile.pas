@@ -3,7 +3,7 @@ unit FindFile;
 interface
 
 uses
-  Types;
+  Types, JwaWinBase, JwaWinError, JwaWinNT, JwaWinType;
 
 function FindFiles(const Directory, FileExt: WideString): TWideStringDynArray;
 
@@ -26,7 +26,7 @@ begin
   Result := nil;
 
   // "ディレクトリ + * + 拡張子"で検索します。
-  FindHandle := FindFirstFileW(PWideChar(Directory + '*' + FileExt)), FindData);
+  FindHandle := FindFirstFileW(PWideChar(Directory + '*' + FileExt), FindData);
 
   // 該当するファイルが存在しなかった場合、
   // 検索を終了します。
@@ -64,7 +64,7 @@ begin
     //if (GetLastError <> ERROR_NO_MORE_FILE) then
 
     // 動的配列を要素分の長さに変更します。
-    SetLength(Result, Index + 1);
+    SetLength(Result, Index);
 
   finally
     FindClose(FindHandle);
