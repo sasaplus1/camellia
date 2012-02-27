@@ -11,6 +11,9 @@ function Utf8ToWide(const S: UTF8String): WideString;
 implementation
 
 // WideStringをUTF-8に変換して返します。
+//
+// * S
+//     * 変換元となる文字列です。
 function WideToUtf8(const S: WideString): UTF8String;
 var
   Len: Integer;
@@ -35,6 +38,9 @@ begin
 end;
 
 // UTF-8をWideStringにして返します。
+//
+// * S
+//     * 変換元となる文字列です。
 function Utf8ToWide(const S: UTF8String): WideString;
 var
   Len: Integer;

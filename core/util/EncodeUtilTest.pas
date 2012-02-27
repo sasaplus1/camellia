@@ -6,6 +6,7 @@ uses
   EncodeUtil, TestFramework;
 
 type
+  PTestCaseEncodeUtil = ^TTestCaseEncodeUtil;
   TTestCaseEncodeUtil = class(TTestCase)
     procedure TestWideToUtf8;
     procedure TestUtf8ToWide;
