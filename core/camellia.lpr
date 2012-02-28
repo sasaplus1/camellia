@@ -2,11 +2,13 @@ program camellia;
 
 {$IFDEF TEST}
 uses
-  EncodeUtilTest, FindFileTest, TextTestRunner;
+  EncodeUtilTest, FindFileTest, PathUtilTest, StrUtilTest, TextTestRunner;
 
 begin
   EncodeUtilTest.RegisterTests;
   FindFileTest.RegisterTests;
+  PathUtilTest.RegisterTests;
+  StrUtilTest.RegisterTests;
   RunRegisteredTests;
 end.
 {$ELSE}
