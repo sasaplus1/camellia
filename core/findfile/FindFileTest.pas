@@ -29,7 +29,7 @@ var
   Files: TWideStringDynArray;
 begin
   // テストディレクトリから".txt"を検索します。
-  Files := FindFiles(Utf8Decode(ExtractFilePath(ExeName) + PATH),
+  Files := FindFiles(Utf8Decode(ExtractFilePath(ParamStr(0)) + PATH),
     Utf8Decode(EXT));
 
   // ファイル数が一致しているか確認します。
