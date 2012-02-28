@@ -8,6 +8,7 @@ uses
 type
   PTestCaseEncodeUtil = ^TTestCaseEncodeUtil;
   TTestCaseEncodeUtil = class(TTestCase)
+  published
     procedure TestWideToUtf8;
     procedure TestUtf8ToWide;
   end;

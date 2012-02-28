@@ -3,11 +3,12 @@ unit FindFileTest;
 interface
 
 uses
-  FindFile, TestFramework, Types;
+  FindFile, SysUtils, TestFramework, Types;
 
 type
   PTestCaseFindFile = ^TTestCaseFindFile;
   TTestCaseFindFile = class(TTestCase)
+  published
     procedure TestFindFiles;
   end;
 
@@ -18,17 +19,28 @@ implementation
 // ファイル検索をするテストです。
 procedure TTestCaseFindFile.TestFindFiles;
 const
-  EXT = '.exe';
-  FILENAME = '.\camellia.exe';
-  PATH = '.\';
+  EXT = '.txt';
+  FILE1 = 'aaa.txt';
+  FILE2 = 'bbb.txt';
+  FILE3 = 'ccc.txt';
+  PATH = 'files\';
 var
+  i: Integer;
   Files: TWideStringDynArray;
 begin
-  // カレントディレクトリから".exe"を検索するテストです。
-  Files := FindFiles(Utf8Decode(PATH), Utf8Decode(EXT));
-  CheckEquals(1, Length(Files), 'File count is not 1.');
-  CheckEquals(Utf8Decode(FILENAME), Files[0],
-    'Files[0] is not "' + FILENAME + '".');
+  // テストディレクトリから".txt"を検索します。
+  Files := FindFiles(Utf8Decode(ExtractFilePath(ExeName) + PATH),
+    Utf8Decode(EXT));
+
+  // ファイル数が一致しているか確認します。
+  CheckEquals(3, Length(Files), 'File count is not 3.');
+
+  // ファイル名が一致しているか確認します。
+  for i := 0 to High(Files) do
+    Check((Files[i] = Utf8Decode(FILE1)) or
+      (Files[i] = Utf8Decode(FILE2)) or
+      (Files[i] = Utf8Decode(FILE3)),
+      'Is an unknown filename "' + Files[i] + '".');
 end;
 
 procedure RegisterTests;

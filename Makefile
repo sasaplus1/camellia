@@ -6,15 +6,17 @@
 core_exe = ./core/camellia.exe
 core_res = ./core/camellia.res
 
+test_dir = ./test
+
 fptest = ./lib/fptest
 apilib = ./lib/apilib
 w32api = ./lib/w32api
 # }}}
 
 # compiler settings {{{
-win = $(filter-out Linux Darwin, $(shell uname))
+Windows = $(filter-out Linux Darwin, $(shell uname))
 
-PC = $(if $(win), ppcrossx64, fpc)
+PC = $(if $(Windows), ppcrossx64, fpc)
 PFLAGS = \
   -Fu$(fptest)/src \
   -Fu$(fptest)/3rdparty/epiktimer \
@@ -24,9 +26,9 @@ PFLAGS = \
   -Fu$(apilib)/Win32API \
   -Mobjfpc \
   -Twin64 \
-  -XP$(if $(win),,x86_64-w64-mingw32-)
+  -XP$(if $(Windows),,x86_64-w64-mingw32-)
 
-RC = $(if $(win), windres, x86_64-w64-mingw32-windres)
+RC = $(if $(Windows), windres, x86_64-w64-mingw32-windres)
 RCFLAGS = \
   --include-dir=$(w32api)/include \
   --language=0411 \
@@ -86,6 +88,7 @@ core-debug: $(core_res)
 .PHONY: core-test # {{{
 core-test:
 	$(PC) $(PFLAGS) $(core_units) -dTEST -WC $(core_exe:.exe=.lpr)
+	$(MV) $(core_exe) $(test_dir)
 # }}}
 
 .PHONY: setup # {{{
