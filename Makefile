@@ -87,8 +87,7 @@ core-debug: $(core_res)
 
 .PHONY: core-test # {{{
 core-test:
-	$(PC) $(PFLAGS) $(core_units) -dTEST -WC $(core_exe:.exe=.lpr)
-	$(MV) $(core_exe) $(test_dir)
+	$(PC) $(PFLAGS) $(core_units) -FE$(test_dir) -dTEST -WC $(core_exe:.exe=.lpr)
 # }}}
 
 .PHONY: setup # {{{
