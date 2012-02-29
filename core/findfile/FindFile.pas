@@ -54,8 +54,9 @@ begin
       if (Index > High(Result)) then
         SetLength(Result, Length(Result) * 2);
 
-      // ディレクトリ名とファイル名を連結したものを動的配列に代入します。
-      Result[Index] := Directory + FindData.cFileName;
+      // ファイル名を動的配列に代入します。
+      with FindData do
+        SetString(Result[Index], cFileName, lstrlenW(cFileName));
       Inc(Index);
 
     // ディレクトリ内の検索が終わるまでループします。
