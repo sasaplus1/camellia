@@ -13,7 +13,7 @@ begin
 end.
 {$ELSE}
 
-{$R *.res}
+{$L camellia.obj}
 
 begin
 
