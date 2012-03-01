@@ -1,5 +1,7 @@
-#include <JwaWinVer.pas>
+#include <resource.pas>
+IDI_MAIN ICON "./core/resource/icon.ico"
 
+#include <JwaWinVer.pas>
 1 VERSIONINFO
 FILEVERSION 0,0,1,0
 PRODUCTVERSION 0,0,1,0
@@ -22,4 +24,4 @@ BEGIN
 	END
 END
 
-/* vim:ff=dos: */
+/* vim:set ff=dos: */

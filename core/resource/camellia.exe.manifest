@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<assembly
+  manifestVersion="1.0"
+  xmlns="urn:schemas-microsoft-com:asm.v1">
+  <assemblyIdentity
+    name="camellia"
+    processorArchitecture="IA64"
+    type="win32"
+    version="1.0.0.0"/>
+  <description>camellia</description>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity
+        language="*"
+        name="Microsoft.Windows.Common-Controls"
+        processorArchitecture="IA64"
+        publicKeyToken="6595b64144ccf1df"
+        type="win32"
+        version="6.0.0.0"/>
+    </dependentAssembly>
+  </dependency>
+</assembly>

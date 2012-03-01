@@ -6,6 +6,8 @@
 core_exe = ./core/camellia.exe
 core_obj = ./core/camellia.obj
 
+core_res = ./core/resource
+
 test_dir = ./test
 
 fptest = ./lib/fptest
@@ -31,11 +33,12 @@ PFLAGS = \
 RCPP = fprcp
 RCPPFLAGS = \
   -l PASCAL \
-  -p $(apilib)/Win32API
+  -p '$(core_res);$(apilib)/Win32API'
 
 RC = $(if $(Windows),windres,x86_64-w64-mingw32-windres)
 RCFLAGS = \
-  --language=0411
+  --language=0411 \
+  --include-dir=$(core_res)
 
 RCCV = fpcres
 RCCVFLAGS = \
