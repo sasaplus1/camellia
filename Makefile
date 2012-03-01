@@ -102,14 +102,15 @@ setup:
 	 then \
 	   (cd '$(apilib)'; svn update); \
 	 else \
-	   svn checkout https://jedi-apilib.svn.sourceforge.net/svnroot/jedi-apilib/jwapi/branches/2.4a '$(apilib)'; \
+	   svn checkout --non-interactive --trust-server-cert \
+	     https://jedi-apilib.svn.sourceforge.net/svnroot/jedi-apilib/jwapi/branches/2.4a '$(apilib)'; \
 	 fi
 	-if [ -d '$(w32api)' ]; \
 	 then \
 	   $(RM) $(w32api); \
 	 fi; \
 	 mkdir -p $(w32api); \
-	 $(downloader) 'http://ftp.jaist.ac.jp/pub/sourceforge/m/project/mi/mingw/MinGW/Base/w32api/$(w32api_uri)'; \
+	 $(downloader) http://ftp.jaist.ac.jp/pub/sourceforge/m/project/mi/mingw/MinGW/Base/w32api/$(w32api_uri); \
 	 tar xvfJ '$(w32api_arc)' -C '$(w32api)'; \
 	 $(RM) $(w32api_arc)
 # }}}
