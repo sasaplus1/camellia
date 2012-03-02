@@ -33,12 +33,14 @@ PFLAGS = \
 RCPP = fprcp
 RCPPFLAGS = \
   -l PASCAL \
-  -p '$(core_res);$(apilib)/Win32API'
+  -p "$(core_res);$(apilib)/Win32API"
 
 RC = $(if $(Windows),windres,x86_64-w64-mingw32-windres)
 RCFLAGS = \
+  --verbose \
   --language=0411 \
-  --include-dir=$(core_res)
+  --include-dir=$(core_res) \
+  $(if $(Windows),--use-temp-file,--no-use-temp-file)
 
 RCCV = fpcres
 RCCVFLAGS = \
@@ -62,7 +64,7 @@ objs = $(filter %.o %.or %.ppu %.res, \
 
 .SUFFIXES: .rc .res # {{{
 .rc.res:
-	$(RCPP) -i $< $(RCPPFLAGS) | $(RC) $(RCFLAGS) --output=$@
+	$(RC) $(RCFLAGS) --input=$< --output=$@ --preprocessor='$(RCPP) -i $< $(RCPPFLAGS)'
 # }}}
 
 .SUFFIXES: .res .obj # {{{
