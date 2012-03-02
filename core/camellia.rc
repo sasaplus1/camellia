@@ -1,4 +1,4 @@
-#include <resource.pas>
+#include <Resource.pas>
 IDI_MAIN ICON "./core/resource/icon.ico"
 
 #include <JwaWinVer.pas>

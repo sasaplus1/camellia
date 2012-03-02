@@ -96,7 +96,7 @@ core-debug: $(core_obj)
 # }}}
 
 .PHONY: core-test # {{{
-core-test:
+core-test: $(core_obj)
 	$(PC) $(PFLAGS) $(core_units) -dTEST -WC $(core_exe:.exe=.lpr)
 # }}}
 

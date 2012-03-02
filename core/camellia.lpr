@@ -1,5 +1,7 @@
 program camellia;
 
+{$L camellia.obj}
+
 {$IFDEF TEST}
 uses
   EncodeUtilTest, FindFileTest, PathUtilTest, StrUtilTest, TextTestRunner;
@@ -12,8 +14,6 @@ begin
   RunRegisteredTests;
 end.
 {$ELSE}
-
-{$L camellia.obj}
 
 begin
 
