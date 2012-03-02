@@ -9,10 +9,10 @@ core_obj = ./core/camellia.obj
 core_res = ./core/resource
 
 test_dir = ./test
+wiki_dir = ./wiki
 
 fptest = ./lib/fptest
 apilib = ./lib/apilib
-w32api = ./lib/w32api
 # }}}
 
 # compiler settings {{{
@@ -116,6 +116,12 @@ setup:
 	 else \
 	   svn checkout --non-interactive --trust-server-cert \
 	     https://jedi-apilib.svn.sourceforge.net/svnroot/jedi-apilib/jwapi/branches/2.4a '$(apilib)'; \
+	 fi
+	-if [ -d '$(wiki_dir)' ]; \
+	 then \
+	   (cd '$(wiki_dir)'; hg pull --update); \
+	 else \
+	   hg clone https://bitbucket.org/sasaplus1/camellia/wiki '$(wiki_dir)'; \
 	 fi
 # }}}
 
