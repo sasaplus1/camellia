@@ -20,6 +20,7 @@ Windows = $(filter-out %OS%, $(shell echo "%OS%"))
 
 PC = $(if $(Windows),ppcrossx64,fpc)
 PFLAGS = \
+  -dUNICODE \
   -Fu$(fptest)/src \
   -Fu$(fptest)/3rdparty/epiktimer \
   -Fu$(apilib)/src \
