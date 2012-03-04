@@ -16,7 +16,7 @@ apilib = ./lib/apilib
 # }}}
 
 # compiler settings {{{
-Windows = $(filter-out Linux Darwin, $(shell uname))
+Windows = $(filter-out %OS%, $(shell echo "%OS%"))
 
 PC = $(if $(Windows),ppcrossx64,fpc)
 PFLAGS = \
@@ -75,11 +75,24 @@ objs = $(filter %.o %.or %.ppu %.res, \
 .PHONY: all # {{{
 all:
 	@echo 'Target:'
+	@echo
 	@echo '  clean'
+	@echo '    remove compiled objects'
+	@echo
 	@echo '  core'
+	@echo '    compile core application'
+	@echo
 	@echo '  core-debug'
+	@echo '    compile core application (added debug symbol)'
+	@echo
 	@echo '  core-test'
+	@echo '    compile core application for the test'
+	@echo
 	@echo '  setup'
+	@echo '    download (or update) libraries from repositories'
+	@echo
+	@echo '  wiki'
+	@echo '    download (or update) documented wiki from camellia repos'
 # }}}
 
 .PHONY: clean # {{{
@@ -117,6 +130,10 @@ setup:
 	   svn checkout --non-interactive --trust-server-cert \
 	     https://jedi-apilib.svn.sourceforge.net/svnroot/jedi-apilib/jwapi/branches/2.4a '$(apilib)'; \
 	 fi
+# }}}
+
+.PHONY: wiki # {{{
+wiki:
 	-if [ -d '$(wiki_dir)' ]; \
 	 then \
 	   (cd '$(wiki_dir)'; hg pull --update); \
