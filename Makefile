@@ -16,9 +16,9 @@ apilib = ./lib/apilib
 # }}}
 
 # compiler settings {{{
-Windows = $(filter-out %OS%, $(shell echo "%OS%"))
+Windows := $(OS)
 
-PC = $(if $(Windows),ppcrossx64,fpc)
+PC = fpc
 PFLAGS = \
   -Fu$(fptest)/src \
   -Fu$(fptest)/3rdparty/epiktimer \
@@ -27,6 +27,7 @@ PFLAGS = \
   -Fu$(apilib)/COM \
   -Fu$(apilib)/Win32API \
   -Mobjfpc \
+  -Px86_64 \
   -Twin64 \
   -XP$(if $(Windows),,x86_64-w64-mingw32-)
 
@@ -49,12 +50,12 @@ RCCVFLAGS = \
 # }}}
 
 # file list {{{
-core_units = $(sort $(addprefix -Fu, \
+core_units := $(sort $(addprefix -Fu, \
   $(dir $(wildcard ./core/*)) \
   $(dir $(wildcard ./core/*/*)) \
 ))
 
-objs = $(filter %.o %.or %.ppu %.res, \
+objs := $(filter %.o %.or %.ppu %.res, \
   $(wildcard ./*) \
   $(wildcard ./*/*) \
   $(wildcard ./*/*/*) \
