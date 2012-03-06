@@ -4,17 +4,21 @@ program camellia;
 
 {$IFDEF TEST}
 uses
-  EncodeUtilTest, FindFileTest, PathUtilTest, StrUtilTest, TextTestRunner;
+  CommandListTest, EncodeUtilTest, FindFileTest, PathUtilTest, PluginTest,
+  PluginContainerTest, PluginListTest, StrUtilTest, TextTestRunner;
 
 begin
+  CommandListTest.RegisterTests;
   EncodeUtilTest.RegisterTests;
   FindFileTest.RegisterTests;
   PathUtilTest.RegisterTests;
+  PluginTest.RegisterTests;
+  PluginContainerTest.RegisterTests;
+  PluginListTest.RegisterTests;
   StrUtilTest.RegisterTests;
   RunRegisteredTests;
 end.
 {$ELSE}
-
 begin
 
 end.
