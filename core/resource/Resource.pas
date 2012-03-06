@@ -6,28 +6,29 @@ uses
   JwaWinType, JwaWinUser;
 
 type
-  // �A�C�R���T�C�Y��\���񋓌^�ł��B
+  // アイコンサイズを表す列挙型です。
   //
   // * isSmall
-  //     * �������T�C�Y�̃A�C�R��
+  //     * 小さいサイズのアイコン
   // * isNormal
-  //     * �ʏ�̃T�C�Y�̃A�C�R��
+  //     * 通常のサイズのアイコン
   TIconSize = (
     isSmall,
     isNormal
   );
 
 const
+  // メインアイコンのリソースIDです。
   IDI_MAIN = 100;
   
 function LoadMainIcon(Size: TIconSize): HICON;
 
 implementation
 
-// ���C���̃��\�[�X�A�C�R�����擾���܂��B
+// メインのリソースアイコンを取得します。
 //
 // * Size
-//     * �擾����T�C�Y�ł��B
+//     * 取得するサイズです。
 function LoadMainIcon(Size: TIconSize): HICON;
 var
   x, y: Integer;
