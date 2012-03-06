@@ -20,6 +20,7 @@ Windows := $(OS)
 
 PC = fpc
 PFLAGS = \
+  -dUNICODE \
   -Fu$(fptest)/src \
   -Fu$(fptest)/3rdparty/epiktimer \
   -Fu$(apilib)/src \
