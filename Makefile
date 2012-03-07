@@ -5,8 +5,12 @@
 # path settings {{{
 core_exe = ./core/camellia.exe
 core_obj = ./core/camellia.obj
-
 core_res = ./core/resource
+
+core_dir := $(sort $(addprefix -Fu, \
+  $(dir $(wildcard ./core/*)) \
+  $(dir $(wildcard ./core/*/*)) \
+))
 
 test_dir = ./test
 wiki_dir = ./wiki
@@ -51,16 +55,17 @@ RCCVFLAGS = \
 # }}}
 
 # file list {{{
-core_units := $(sort $(addprefix -Fu, \
-  $(dir $(wildcard ./core/*)) \
-  $(dir $(wildcard ./core/*/*)) \
-))
-
 objs := $(filter %.o %.or %.ppu %.res, \
   $(wildcard ./*) \
   $(wildcard ./*/*) \
   $(wildcard ./*/*/*) \
   $(wildcard ./*/*/*/*) \
+)
+
+test_dll := $(subst .lpr,.dll, \
+  $(filter %.lpr, \
+    $(wildcard $(test_dir)/plugin/*) \
+  ) \
 )
 # }}}
 
@@ -72,6 +77,11 @@ objs := $(filter %.o %.or %.ppu %.res, \
 .SUFFIXES: .res .obj # {{{
 .res.obj:
 	$(RCCV) $(RCCVFLAGS) --input $< --output $@
+# }}}
+
+.SUFFIXES: .lpr .dll # {{{
+.lpr.dll:
+	$(PC) $(PFLAGS) $<
 # }}}
 
 .PHONY: all # {{{
@@ -95,26 +105,27 @@ all:
 	@echo
 	@echo '  wiki'
 	@echo '    download (or update) documented wiki from camellia repos'
+	@echo
 # }}}
 
 .PHONY: clean # {{{
 clean:
-	$(RM) $(core_exe) $(core_obj) $(objs)
+	$(RM) $(core_exe) $(core_obj) $(objs) $(test_dll)
 # }}}
 
 .PHONY: core # {{{
 core: $(core_obj)
-	$(PC) $(PFLAGS) $(core_units) -O2 -WG -Xs $(core_exe:.exe=.lpr)
+	$(PC) $(PFLAGS) $(core_dir) -O2 -WG -Xs $(core_exe:.exe=.lpr)
 # }}}
 
 .PHONY: core-debug # {{{
 core-debug: $(core_obj)
-	$(PC) $(PFLAGS) $(core_units) -gh -gl -WG $(core_exe:.exe=.lpr)
+	$(PC) $(PFLAGS) $(core_dir) -gh -gl -WG $(core_exe:.exe=.lpr)
 # }}}
 
 .PHONY: core-test # {{{
-core-test: $(core_obj)
-	$(PC) $(PFLAGS) $(core_units) -dTEST -WC $(core_exe:.exe=.lpr)
+core-test: $(core_obj) $(test_dll)
+	$(PC) $(PFLAGS) $(core_dir) -dTEST -WC $(core_exe:.exe=.lpr)
 # }}}
 
 .PHONY: setup # {{{
